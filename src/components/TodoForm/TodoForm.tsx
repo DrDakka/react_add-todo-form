@@ -4,11 +4,11 @@ import { Todo } from '../../types/todo';
 
 type Props = {
   users: User[];
-  todo: Todo[];
+  todos: Todo[];
   onAddTodo: (todo: Todo) => void;
 };
 
-export const TodoForm: React.FC<Props> = ({ users, todo, onAddTodo }) => {
+export const TodoForm: React.FC<Props> = ({ users, todos, onAddTodo }) => {
   const [title, setTitle] = useState('');
   const [userId, setUserId] = useState(0);
   const [nameError, setNameError] = useState('');
@@ -55,7 +55,7 @@ export const TodoForm: React.FC<Props> = ({ users, todo, onAddTodo }) => {
       return;
     }
 
-    const maxId = todo.reduce((max, { id }) => Math.max(max, id), 0);
+    const maxId = todos.reduce((max, { id }) => Math.max(max, id), 0);
 
     const newTodo: Todo = {
       id: maxId + 1,

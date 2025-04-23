@@ -25,7 +25,7 @@ export const App = () => {
       <h1>Add todo form</h1>
       <TodoForm
         users={usersFromServer}
-        todo={todos}
+        todos={todos}
         onAddTodo={handleAddTodo}
       />
       <TodoList todos={preparedParams} />
