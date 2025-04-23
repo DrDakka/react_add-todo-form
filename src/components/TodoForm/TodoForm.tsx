@@ -16,42 +16,41 @@ export const TodoForm: React.FC<Props> = ({ users, todos, onAddTodo }) => {
 
   function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
-    if (nameError) {
-      setNameError('');
-    }
+    setNameError('');
   }
 
   function handleUserChange(event: React.ChangeEvent<HTMLSelectElement>) {
     setUserId(+event.target.value);
-    if (userError) {
-      setUserError('');
-    }
+    setUserError('');
   }
+
+  const titleValid = () => {
+    if (title.trim() === '') {
+      setNameError('Please enter a title');
+
+      return false;
+    }
+
+    return true;
+  };
+
+  const userValid = () => {
+    if (userId === 0) {
+      setUserError('Please choose a user');
+
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const titleValid = () => {
-      if (title.trim() === '') {
-        setNameError('Please enter a title');
+    const isTitleValid = titleValid();
+    const isUserValid = userValid();
 
-        return false;
-      }
-
-      return true;
-    };
-
-    const userValid = () => {
-      if (userId === 0) {
-        setUserError('Please choose a user');
-
-        return false;
-      }
-
-      return true;
-    };
-
-    if (!titleValid() || !userValid()) {
+    if (!isTitleValid || !isUserValid) {
       return;
     }
 
@@ -64,10 +63,13 @@ export const TodoForm: React.FC<Props> = ({ users, todos, onAddTodo }) => {
       userId,
     };
 
-    onAddTodo(newTodo);
+    if (nameError === '' || userError === '') {
+      setTitle('');
+      setUserId(0);
+      onAddTodo(newTodo);
+    }
 
-    setTitle('');
-    setUserId(0);
+    return;
   };
 
   return (
