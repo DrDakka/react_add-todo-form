@@ -5,7 +5,7 @@ import { Todo } from '../../types/todo';
 type Props = {
   users: User[];
   todos: Todo[];
-  onAddTodo: (todo: Todo) => void;
+  onAddTodo: (todos: Todo) => void;
 };
 
 export const TodoForm: React.FC<Props> = ({ users, todos, onAddTodo }) => {
