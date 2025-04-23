@@ -13,7 +13,7 @@ export const App = () => {
   const [todos, setTodos] = useState(todosFromServer);
   const preparedParams: TodoWithUser[] = todos.map(todo => ({
     ...todo,
-    user: usersFromServer.find(user => user.id === todo.userId),
+    user: usersFromServer.find(user => user.id === todo.userId) || null,
   }));
 
   const handleAddTodo = (newTodo: Todo) => {
@@ -25,7 +25,7 @@ export const App = () => {
       <h1>Add todo form</h1>
       <TodoForm
         users={usersFromServer}
-        todo={todosFromServer}
+        todo={todos}
         onAddTodo={handleAddTodo}
       />
       <TodoList todos={preparedParams} />

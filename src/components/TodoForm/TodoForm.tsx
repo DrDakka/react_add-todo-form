@@ -16,7 +16,16 @@ export const TodoForm: React.FC<Props> = ({ users, todo, onAddTodo }) => {
 
   function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
-    setNameError('');
+    if (nameError) {
+      setNameError('');
+    }
+  }
+
+  function handleUserChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setUserId(+event.target.value);
+    if (userError) {
+      setUserError('');
+    }
   }
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -82,12 +91,7 @@ export const TodoForm: React.FC<Props> = ({ users, todo, onAddTodo }) => {
           data-cy="userSelect"
           id="user-id"
           value={userId}
-          onChange={event => {
-            setUserId(+event.target.value);
-            setUserError('');
-
-            return;
-          }}
+          onChange={handleUserChange}
         >
           <option value="0" disabled>
             Choose a user

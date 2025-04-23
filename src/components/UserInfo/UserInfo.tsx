@@ -6,7 +6,7 @@ type Props = {
 
 export const UserInfo: React.FC<Props> = ({ user }) => {
   if (!user) {
-    return undefined;
+    return null;
   }
 
   const { name, email } = user;
